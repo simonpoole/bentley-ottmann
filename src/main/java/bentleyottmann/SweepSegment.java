@@ -82,15 +82,29 @@ final class SweepSegment {
     // See: http://www.cs.swan.ac.uk/~cssimon/line_intersection.html
     @Nullable
     static IPoint intersection(@NotNull SweepSegment s1, @NotNull SweepSegment s2, @NotNull IPointFactory pointFactory) {
-        final double x1 = s1.leftEvent().point().x();
-        final double y1 = s1.leftEvent().point().y();
-        final double x2 = s1.rightEvent().point().x();
-        final double y2 = s1.rightEvent().point().y();
+        
+        IPoint p1 = s1.leftEvent().point();
+        IPoint p2 = s1.rightEvent().point();
+        IPoint p3 = s2.leftEvent().point();
+        IPoint p4 = s2.rightEvent().point();
+        
+        // check if the end points are actually intersections
+        if (p1 == p3 || p1 == p4 || p2 == p3 || p2 == p4) {
+            return null;
+        }
+        
+        final double x1 = p1.x();
+        final double y1 = p1.y();
+        
+        final double x2 = p2.x();
+        final double y2 = p2.y();
 
-        final double x3 = s2.leftEvent().point().x();
-        final double y3 = s2.leftEvent().point().y();
-        final double x4 = s2.rightEvent().point().x();
-        final double y4 = s2.rightEvent().point().y();
+        
+        final double x3 = p3.x();
+        final double y3 = p3.y();
+        
+        final double x4 = p4.x();
+        final double y4 = p4.y();
 
         final double v = (x4 - x3) * (y1 - y2) - (x1 - x2) * (y4 - y3);
         if (v == 0) {

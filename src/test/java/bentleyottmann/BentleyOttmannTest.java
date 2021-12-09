@@ -96,4 +96,28 @@ public class BentleyOttmannTest extends TestCase {
         bentleyOttmann.findIntersections();
         assertEquals(15, bentleyOttmann.intersections().size());
     }
+    
+    public void testFindIntersections6() {
+        final List<ISegment> segments = new ArrayList<>();
+        Point p1 = new Point(0.0, 0.0);
+        Point p2 = new Point(5.0, 10.0);
+        Point p3 = new Point(5.0, -10.0);
+        Point p4 = new Point(10.0, 10.0);
+        Point p5 = new Point(10.0, -10.0);
+        Point p6 = new Point(20.0, 0.0);
+        
+        segments.add(new Segment(p1, p2));
+        segments.add(new Segment(p2, p5));
+        segments.add(new Segment(p5, p6));
+        
+        segments.add(new Segment(p1, p3));
+        segments.add(new Segment(p3, p4));
+        segments.add(new Segment(p4, p6));
+        
+        final BentleyOttmann bentleyOttmann = new BentleyOttmann(Point::new);
+        bentleyOttmann.addSegments(segments);
+        bentleyOttmann.findIntersections();
+
+        assertEquals(1, bentleyOttmann.intersections().size());
+    }
 }
