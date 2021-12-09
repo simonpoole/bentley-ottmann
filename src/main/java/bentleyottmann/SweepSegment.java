@@ -1,20 +1,20 @@
 package bentleyottmann;
 
-import com.sun.istack.internal.NotNull;
-import com.sun.istack.internal.Nullable;
-
 import java.util.Locale;
 import java.util.Objects;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 final class SweepSegment {
     @NotNull
-    final private Event e1;
+    private final Event e1;
 
     @NotNull
-    final private Event e2;
+    private final Event e2;
 
     @NotNull
-    final private ISegment mSegment;
+    private final ISegment mSegment;
 
     private double mPosition;
 
@@ -23,9 +23,10 @@ final class SweepSegment {
 
         Event e1 = new Event(s.p1(), this, Event.Type.POINT_LEFT);
         Event e2 = new Event(s.p2(), this, Event.Type.POINT_RIGHT);
-        if (!(Objects.compare(e2, e1, Event::compareTo) == 1)) {
+        if (Objects.compare(e2, e1, Event::compareTo) != 1) {
             final Event swap = e1;
-            e1 = e2; e2 = swap;
+            e1 = e2;
+            e2 = swap;
             e1.setType(Event.Type.POINT_LEFT);
             e2.setType(Event.Type.POINT_RIGHT);
         }
@@ -69,7 +70,7 @@ final class SweepSegment {
         final double x2 = rightEvent().point().x();
         final double y2 = rightEvent().point().y();
 
-        final double y = y1 + ( ((y2 - y1) * (x - x1)) / (x2 - x1) );
+        final double y = y1 + (((y2 - y1) * (x - x1)) / (x2 - x1));
         this.setPosition(y);
     }
 

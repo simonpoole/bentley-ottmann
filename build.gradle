@@ -1,0 +1,75 @@
+
+
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+    id 'signing'
+}
+
+repositories {
+    mavenCentral()
+}
+
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
+dependencies {
+    compile 'org.jetbrains:annotations:15.0'
+    // 
+    testImplementation 'junit:junit:4.13'
+}
+
+group = 'ch.poole.misc'
+version = '0.0.0'
+sourceCompatibility = '1.8'
+
+ext {
+    repoUrl = 'https://github.com/simonpoole/bentley-ottmann.git'
+    spdxId = 'Unknown'
+}
+
+publishing {
+    publications {
+        Release(MavenPublication) {
+            from components.java
+            groupId group
+            artifactId 'bentley-ottmann'
+            pom {
+                name = artifactId
+                description = 'Java implementation of Bentley-Ottmann algorithm'
+                url = 'https://github.com/simonpoole/bentley-ottmann'
+                scm {
+                    url = repoUrl
+                }
+                licenses {
+                    license {
+                        name = spdxId
+                        url = 'https://github.com/simonpoole/bentley-ottmann/LICENSE'
+                    }
+                }
+                developers {
+                    developer {
+                        name = 'Stanislav Antonov'
+                    }
+                    developer {
+                        name = 'Simon Poole'
+                    }
+                }
+            }
+            repositories {
+                maven {
+                    name = 'sonatype'
+                    credentials {
+                        username System.getenv('SONATYPE_USER')
+                        password System.getenv('SONATYPE_PASSWORD')
+                    }
+                    def releasesRepoUrl = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+                    def snapshotsRepoUrl = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+                    url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+                }
+            }
+        }
+    }
+}

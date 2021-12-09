@@ -1,6 +1,4 @@
-package tests;
-
-import bentleyottmann.IPoint;
+package bentleyottmann;
 
 class Point implements IPoint {
     final private double x;

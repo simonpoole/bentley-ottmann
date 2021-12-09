@@ -1,27 +1,27 @@
 package bentleyottmann;
 
-import com.sun.istack.internal.NotNull;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+
+import org.jetbrains.annotations.NotNull;
 
 final class Event implements Comparable<Event> {
     enum Type {
         POINT_LEFT, POINT_RIGHT, INTERSECTION
     }
 
-    final private static double EPSILON = 1E-9;
+    private static final double EPSILON = 1E-9;
 
     @NotNull
     private Type mType;
 
     @NotNull
-    final private IPoint mPoint;
+    private final IPoint mPoint;
 
     @NotNull
-    final private List<SweepSegment> mSegments = new ArrayList<>();
+    private final List<SweepSegment> mSegments = new ArrayList<>();
 
     Event(@NotNull IPoint p, @NotNull SweepSegment s1, @NotNull Type type) {
         mPoint = p;
@@ -34,7 +34,7 @@ final class Event implements Comparable<Event> {
         mSegments.add(s2);
 
         // Ensure s1 is always above s2
-        if (!(mSegments.get(0).position() > mSegments.get(1).position())) {
+        if (mSegments.get(0).position() <= mSegments.get(1).position()) {
             Collections.swap(mSegments, 0, 1);
         }
     }

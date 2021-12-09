@@ -3,8 +3,8 @@ package bentleyottmann;
 import java.util.Comparator;
 import java.util.TreeSet;
 
-import com.sun.istack.internal.NotNull;
-import com.sun.istack.internal.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 class SweepLine extends TreeSet<SweepSegment> {
     SweepLine() {

@@ -1,8 +1,5 @@
-package tests;
+package bentleyottmann;
 
-import bentleyottmann.BentleyOttmann;
-import bentleyottmann.IPoint;
-import bentleyottmann.ISegment;
 import junit.framework.TestCase;
 
 import java.util.ArrayList;
@@ -79,20 +76,20 @@ public class BentleyOttmannTest extends TestCase {
 
     public void testFindIntersections5() {
         final List<ISegment> segments = new ArrayList<>();
-        segments.add(new Segment(new Point (2.0681655529586,6.7721029389621), new Point (3.8750905945826,4.7795349136096), "f"));
-        segments.add(new Segment(new Point(3.7637048043455,5.0765636875751) , new Point(2.5013325149917,2.9107288774094), "g"));
-        segments.add(new Segment(new Point (2.4146991225851,3.1706290546293), new Point (4.4196433468528,1.6731089858861), "h"  ));
-        segments.add(new Segment(new Point (4.1844955674634,1.7597423782927), new Point (7.1547833071193,2.8612240817484), "i"  ));
-        segments.add(new Segment(new Point (6.870130732069,2.9354812752398), new Point (8.887451155252,1.3637040130053) , "j" ));
-        segments.add(new Segment(new Point (8.5904223812864,1.4008326097509), new Point(12.7364490178894,5.1384446821513) , "k"));
-        segments.add(new Segment(new Point (12.7735776146351,4.8785445049314), new Point (11.1399193578244,8.7399185664841) , "l" ));
-        segments.add(new Segment(new Point(11.4369481317899,8.5666517816708) , new Point (7.0681499147127,9.6557572862113) , "m" ));
-        segments.add(new Segment(new Point (7.3032976941021,9.7300144797027), new Point (5.2736010720039,8.3067516044509) , "n" ));
-        segments.add(new Segment(new Point (5.5582536470543,8.3686325990271), new Point (3.1696472564143,9.0369473404497) , "p" ));
-        segments.add(new Segment(new Point (3.5161808260408,9.160709329602), new Point (2.092917950789,6.5493313584879), "q"  ));
+        segments.add(new Segment(new Point(2.0681655529586, 6.7721029389621), new Point(3.8750905945826, 4.7795349136096), "f"));
+        segments.add(new Segment(new Point(3.7637048043455, 5.0765636875751), new Point(2.5013325149917, 2.9107288774094), "g"));
+        segments.add(new Segment(new Point(2.4146991225851, 3.1706290546293), new Point(4.4196433468528, 1.6731089858861), "h"));
+        segments.add(new Segment(new Point(4.1844955674634, 1.7597423782927), new Point(7.1547833071193, 2.8612240817484), "i"));
+        segments.add(new Segment(new Point(6.870130732069, 2.9354812752398), new Point(8.887451155252, 1.3637040130053), "j"));
+        segments.add(new Segment(new Point(8.5904223812864, 1.4008326097509), new Point(12.7364490178894, 5.1384446821513), "k"));
+        segments.add(new Segment(new Point(12.7735776146351, 4.8785445049314), new Point(11.1399193578244, 8.7399185664841), "l"));
+        segments.add(new Segment(new Point(11.4369481317899, 8.5666517816708), new Point(7.0681499147127, 9.6557572862113), "m"));
+        segments.add(new Segment(new Point(7.3032976941021, 9.7300144797027), new Point(5.2736010720039, 8.3067516044509), "n"));
+        segments.add(new Segment(new Point(5.5582536470543, 8.3686325990271), new Point(3.1696472564143, 9.0369473404497), "p"));
+        segments.add(new Segment(new Point(3.5161808260408, 9.160709329602), new Point(2.092917950789, 6.5493313584879), "q"));
 
-        segments.add(new Segment(new Point (5.0434037721806,9.2448674822256), new Point (2.0347498158874,5.3649291223001) , "r" ));
-        segments.add(new Segment(new Point (3.2599935084955,2.1656817027123), new Point (6.47285474689,9.7758064156891) , "s"));
+        segments.add(new Segment(new Point(5.0434037721806, 9.2448674822256), new Point(2.0347498158874, 5.3649291223001), "r"));
+        segments.add(new Segment(new Point(3.2599935084955, 2.1656817027123), new Point(6.47285474689, 9.7758064156891), "s"));
 
         final BentleyOttmann bentleyOttmann = new BentleyOttmann(Point::new);
         bentleyOttmann.addSegments(segments);

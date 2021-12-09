@@ -1,9 +1,7 @@
-package tests;
+package bentleyottmann;
 
-import bentleyottmann.IPoint;
-import bentleyottmann.ISegment;
-import com.sun.istack.internal.NotNull;
-import com.sun.istack.internal.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 class Segment implements ISegment {
     @NotNull

@@ -1,7 +1,8 @@
 package bentleyottmann;
 
 import java.util.PriorityQueue;
-import com.sun.istack.internal.NotNull;
+
+import org.jetbrains.annotations.NotNull;
 
 class EventQueue extends PriorityQueue<Event> {
     @Override

@@ -1,6 +1,6 @@
 package bentleyottmann;
 
-import com.sun.istack.internal.NotNull;
+import org.jetbrains.annotations.NotNull;
 
 public interface IPointFactory {
     @NotNull
