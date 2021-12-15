@@ -22,12 +22,12 @@ dependencies {
 }
 
 group = 'ch.poole.misc'
-version = '0.0.0'
+version = '0.1.0'
 sourceCompatibility = '1.8'
 
 ext {
     repoUrl = 'https://github.com/simonpoole/bentley-ottmann.git'
-    spdxId = 'Unknown'
+    spdxId = 'Apache-2.0'
 }
 
 publishing {
@@ -46,7 +46,7 @@ publishing {
                 licenses {
                     license {
                         name = spdxId
-                        url = 'https://github.com/simonpoole/bentley-ottmann/LICENSE'
+                        url = 'https://github.com/simonpoole/bentley-ottmann/LICENSE.md'
                     }
                 }
                 developers {
