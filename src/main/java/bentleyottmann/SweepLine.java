@@ -1,6 +1,5 @@
 package bentleyottmann;
 
-import java.util.Comparator;
 import java.util.TreeSet;
 
 import org.jetbrains.annotations.NotNull;
@@ -8,13 +7,7 @@ import org.jetbrains.annotations.Nullable;
 
 class SweepLine extends TreeSet<SweepSegment> {
     SweepLine() {
-        super(new Comparator<SweepSegment>() {
-
-            @Override
-            public int compare(@NotNull SweepSegment s1, @NotNull SweepSegment s2) {   
-                return Double.compare(s1.position(), s2.position());
-            }          
-        });
+        super((SweepSegment s1, SweepSegment s2) -> Double.compare(s1.position(), s2.position()));
     }
 
     void remove(@NotNull SweepSegment s) {
