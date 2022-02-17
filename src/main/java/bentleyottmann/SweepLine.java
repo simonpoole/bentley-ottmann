@@ -8,7 +8,13 @@ import org.jetbrains.annotations.Nullable;
 
 class SweepLine extends TreeSet<SweepSegment> {
     SweepLine() {
-        super(Comparator.comparingDouble(SweepSegment::position));
+        super(new Comparator<SweepSegment>() {
+
+            @Override
+            public int compare(@NotNull SweepSegment s1, @NotNull SweepSegment s2) {   
+                return Double.compare(s1.position(), s2.position());
+            }          
+        });
     }
 
     void remove(@NotNull SweepSegment s) {
