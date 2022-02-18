@@ -1,5 +1,6 @@
 package bentleyottmann;
 
+import java.util.Iterator;
 import java.util.TreeSet;
 
 import org.jetbrains.annotations.NotNull;
@@ -11,7 +12,12 @@ class SweepLine extends TreeSet<SweepSegment> {
     }
 
     void remove(@NotNull SweepSegment s) {
-        removeIf(sweepSegment -> sweepSegment.nearlyEqual(s));
+        final Iterator<SweepSegment> it = iterator();
+        while (it.hasNext()) {
+            if (s.nearlyEqual(it.next())) {
+                it.remove();
+            }
+        }
     }
 
     void swap(@NotNull SweepSegment s1, @NotNull SweepSegment s2) {
