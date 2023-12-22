@@ -1,10 +1,22 @@
 
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "com.github.breadmoirai:github-release:2.5.2"
+    }
+}
 
 plugins {
     id 'java-library'
     id 'maven-publish'
     id 'signing'
 }
+
+apply plugin: "com.github.breadmoirai.github-release"
 
 repositories {
     mavenCentral()
@@ -29,6 +41,7 @@ sourceCompatibility = '1.8'
 ext {
     repoUrl = 'https://github.com/simonpoole/bentley-ottmann.git'
     spdxId = 'Apache-2.0'
+    githubToken = System.getenv('GITHUB_TOKEN')
 }
 
 publishing {
@@ -77,4 +90,18 @@ publishing {
 
 signing {
     sign publishing.publications.Release
+}
+
+githubRelease {
+    token project.ext.githubToken == null ? "" : project.ext.githubToken    
+    owner = "simonpoole"
+    tagName = project.version
+    releaseName = project.version
+    targetCommitish = "master" 
+    generateReleaseNotes = true 
+    overwrite = true
+}
+
+afterEvaluate {
+    publishReleasePublicationToSonatypeRepository.dependsOn tasks.githubRelease
 }
