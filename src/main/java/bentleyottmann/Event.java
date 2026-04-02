@@ -86,9 +86,13 @@ final class Event implements Comparable<Event> {
     boolean nearlyEqual(@NotNull Event e) {
         return nearlyEqual(point().x(), e.point().x()) && nearlyEqual(point().y(), e.point().y());
     }
+    
+    static boolean nearlyEqual(@NotNull IPoint a, @NotNull IPoint b) {
+        return nearlyEqual(a.x(), b.x()) && nearlyEqual(a.y(), b.y());
+    }
 
     // Taken from: https://floating-point-gui.de/errors/comparison/
-    private static boolean nearlyEqual(double a, double b) {
+    static boolean nearlyEqual(double a, double b) {
         final double absA = Math.abs(a);
         final double absB = Math.abs(b);
         final double diff = Math.abs(a - b);

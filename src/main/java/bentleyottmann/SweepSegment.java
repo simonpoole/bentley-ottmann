@@ -23,7 +23,9 @@ final class SweepSegment {
 
         Event e1 = new Event(s.p1(), this, Event.Type.POINT_LEFT);
         Event e2 = new Event(s.p2(), this, Event.Type.POINT_RIGHT);
+        System.out.println("Adding segment " + e1 + " " + e2);
         if (Objects.compare(e2, e1, Event::compareTo) != 1) {
+            System.out.println("Swapping " + e1 + " " + e2);
             final Event swap = e1;
             e1 = e2;
             e2 = swap;
@@ -60,7 +62,7 @@ final class SweepSegment {
         return mSegment;
     }
 
-    boolean nearlyEqual(@Nullable SweepSegment s) {
+    boolean nearlyEqual(@NotNull SweepSegment s) {
         return s.leftEvent().nearlyEqual(leftEvent()) && s.rightEvent().nearlyEqual(rightEvent());
     }
 
@@ -82,32 +84,27 @@ final class SweepSegment {
     // See: http://www.cs.swan.ac.uk/~cssimon/line_intersection.html
     @Nullable
     static IPoint intersection(@NotNull SweepSegment s1, @NotNull SweepSegment s2, @NotNull IPointFactory pointFactory) {
-        
+
         IPoint p1 = s1.leftEvent().point();
         IPoint p2 = s1.rightEvent().point();
         IPoint p3 = s2.leftEvent().point();
         IPoint p4 = s2.rightEvent().point();
-        
-        // check if the end points are actually intersections
-        if (p1 == p3 || p1 == p4 || p2 == p3 || p2 == p4) {
-            return null;
-        }
-        
+
         final double x1 = p1.x();
         final double y1 = p1.y();
-        
+
         final double x2 = p2.x();
         final double y2 = p2.y();
 
-        
         final double x3 = p3.x();
         final double y3 = p3.y();
-        
+
         final double x4 = p4.x();
         final double y4 = p4.y();
 
         final double v = (x4 - x3) * (y1 - y2) - (x1 - x2) * (y4 - y3);
-        if (v == 0) {
+        if (Event.nearlyEqual(v, 0)) {
+            System.out.println("v nearly 0 " + v);
             return null;
         }
 
