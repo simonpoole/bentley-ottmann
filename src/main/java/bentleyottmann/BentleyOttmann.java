@@ -104,10 +104,10 @@ public final class BentleyOttmann {
         mSweepLine.clear();
     }
 
-    private void addEventIfIntersection(@Nullable SweepSegment s1, @Nullable SweepSegment s2, @NotNull Event E, boolean check) {
+    private void addEventIfIntersection(@Nullable SweepSegment s1, @Nullable SweepSegment s2, @NotNull Event event, boolean check) {
         if (s1 != null && s2 != null) {
             final IPoint i = SweepSegment.intersection(s1, s2, mPointFactory);
-            if (i != null && i.x() > E.point().x()) {
+            if (i != null && i.x() > event.point().x()) {
                 // Check if intersection point matches any endpoint of either segment
                 if (isSharedEndpoint(s1, s2, i)) {
                     return;

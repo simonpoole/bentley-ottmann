@@ -35,7 +35,6 @@ class SweepLine extends TreeSet<SweepSegment> {
     void swap(@NotNull SweepSegment s1, @NotNull SweepSegment s2) {
         remove(s1);
         remove(s2);
-        System.out.println("SweepLine swap");
         final double swap = s1.position();
         s1.setPosition(s2.position());
         s2.setPosition(swap);
@@ -55,7 +54,6 @@ class SweepLine extends TreeSet<SweepSegment> {
     }
 
     void updatePositions(double x) {
-        System.out.println("SweepLine updatePosition");
         for (SweepSegment s : new ArrayList<>(this)) {
             remove(s);
             s.updatePosition(x);

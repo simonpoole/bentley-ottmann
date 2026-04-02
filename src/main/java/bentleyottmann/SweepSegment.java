@@ -21,20 +21,18 @@ final class SweepSegment {
     SweepSegment(@NotNull ISegment s) {
         mSegment = s;
 
-        Event e1 = new Event(s.p1(), this, Event.Type.POINT_LEFT);
-        Event e2 = new Event(s.p2(), this, Event.Type.POINT_RIGHT);
-        System.out.println("Adding segment " + e1 + " " + e2);
-        if (Objects.compare(e2, e1, Event::compareTo) != 1) {
-            System.out.println("Swapping " + e1 + " " + e2);
-            final Event swap = e1;
-            e1 = e2;
-            e2 = swap;
-            e1.setType(Event.Type.POINT_LEFT);
-            e2.setType(Event.Type.POINT_RIGHT);
+        Event e1init = new Event(s.p1(), this, Event.Type.POINT_LEFT);
+        Event e2init = new Event(s.p2(), this, Event.Type.POINT_RIGHT);
+        if (Objects.compare(e2init, e1init, Event::compareTo) != 1) {
+            final Event swap = e1init;
+            e1init = e2init;
+            e2init = swap;
+            e1init.setType(Event.Type.POINT_LEFT);
+            e2init.setType(Event.Type.POINT_RIGHT);
         }
 
-        this.e1 = e1;
-        this.e2 = e2;
+        this.e1 = e1init;
+        this.e2 = e2init;
 
         updatePosition(leftEvent().point().x());
     }
@@ -104,7 +102,6 @@ final class SweepSegment {
 
         final double v = (x4 - x3) * (y1 - y2) - (x1 - x2) * (y4 - y3);
         if (Event.nearlyEqual(v, 0)) {
-            System.out.println("v nearly 0 " + v);
             return null;
         }
 
