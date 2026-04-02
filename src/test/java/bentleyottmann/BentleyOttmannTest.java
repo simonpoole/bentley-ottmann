@@ -96,7 +96,7 @@ public class BentleyOttmannTest extends TestCase {
         bentleyOttmann.findIntersections();
         assertEquals(15, bentleyOttmann.intersections().size());
     }
-    
+
     public void testFindIntersections6() {
         final List<ISegment> segments = new ArrayList<>();
         Point p1 = new Point(0.0, 0.0);
@@ -105,15 +105,120 @@ public class BentleyOttmannTest extends TestCase {
         Point p4 = new Point(10.0, 10.0);
         Point p5 = new Point(10.0, -10.0);
         Point p6 = new Point(20.0, 0.0);
-        
+
         segments.add(new Segment(p1, p2));
-        segments.add(new Segment(p2, p5));
-        segments.add(new Segment(p5, p6));
-        
-        segments.add(new Segment(p1, p3));
-        segments.add(new Segment(p3, p4));
-        segments.add(new Segment(p4, p6));
-        
+        segments.add(new Segment(new Point(p2), p5));
+        segments.add(new Segment(new Point(p5), p6));
+
+        segments.add(new Segment(new Point(p1), p3));
+        segments.add(new Segment(new Point(p3), p4));
+        segments.add(new Segment(new Point(p4), new Point(p6)));
+
+        final BentleyOttmann bentleyOttmann = new BentleyOttmann(Point::new);
+        bentleyOttmann.addSegments(segments);
+        bentleyOttmann.findIntersections();
+
+        assertEquals(1, bentleyOttmann.intersections().size());
+    }
+
+    public void testFindIntersections7() {
+        System.out.println("test 7");
+        final List<ISegment> segments = new ArrayList<>();
+        Point p1 = new Point(0.0, 0.0);
+        Point p2 = new Point(10.0, 0.0);
+        Point p3 = new Point(10.0, 5.0);
+        Point p4 = new Point(0.0, -5.0);
+        Point p5 = new Point(0.0, 0.0);
+
+        segments.add(new Segment(p1, p2));
+        segments.add(new Segment(new Point(p2), p3));
+        segments.add(new Segment(new Point(p3), p4));
+        segments.add(new Segment(new Point(p4), p5));
+        segments.add(new Segment(new Point(p5), new Point(p1)));
+
+        final BentleyOttmann bentleyOttmann = new BentleyOttmann(Point::new);
+        bentleyOttmann.addSegments(segments);
+        bentleyOttmann.findIntersections();
+
+        assertEquals(1, bentleyOttmann.intersections().size());
+    }
+
+    public void testFindIntersections8() {
+        // polygon
+        System.out.println("test 8");
+        final List<ISegment> segments = new ArrayList<>();
+        Point p1 = new Point(0.0, 0.0);
+        Point p2 = new Point(10.0, 0.0);
+        Point p3 = new Point(10.0, 5.0);
+
+        segments.add(new Segment(p1, p2));
+        segments.add(new Segment(new Point(p2), p3));
+        segments.add(new Segment(new Point(p3), new Point(p1)));
+
+        final BentleyOttmann bentleyOttmann = new BentleyOttmann(Point::new);
+        bentleyOttmann.addSegments(segments);
+        bentleyOttmann.findIntersections();
+
+        assertEquals(0, bentleyOttmann.intersections().size());
+    }
+
+    public void testFindIntersections9() {
+        // self intersecting polygon
+        System.out.println("test 9");
+        final List<ISegment> segments = new ArrayList<>();
+        Point p1 = new Point(0.0, 0.0);
+        Point p2 = new Point(10.0, 0.0);
+        Point p3 = new Point(0.0, 5.0);
+        Point p4 = new Point(10.0, 5.0);
+
+        segments.add(new Segment(p1, p2, "1"));
+        segments.add(new Segment(new Point(p2), p3, "2"));
+        segments.add(new Segment(new Point(p3), p4, "3"));
+        segments.add(new Segment(new Point(p4), new Point(p1), "4"));
+
+        final BentleyOttmann bentleyOttmann = new BentleyOttmann(Point::new);
+        bentleyOttmann.addSegments(segments);
+        bentleyOttmann.findIntersections();
+
+        assertEquals(1, bentleyOttmann.intersections().size());
+    }
+    
+    public void testFindIntersections10() {
+        // self intersecting polygon
+        System.out.println("test 10");
+        final List<ISegment> segments = new ArrayList<>();
+        Point p1 = new Point(0.0, 0.0);
+        Point p2 = new Point(10.0, 0.0);
+        Point p3 = new Point(0.0, 5.0);
+        Point p4 = new Point(10.0, 5.0);
+
+        segments.add(new Segment(p1, p4, "1"));
+        segments.add(new Segment(new Point(p4), p3, "2"));
+        segments.add(new Segment(new Point(p3), p2, "3"));
+        segments.add(new Segment(new Point(p2), new Point(p1), "4"));
+
+        final BentleyOttmann bentleyOttmann = new BentleyOttmann(Point::new);
+        bentleyOttmann.addSegments(segments);
+        bentleyOttmann.findIntersections();
+for (IPoint p : bentleyOttmann.intersections()) {
+    System.out.println("Intersection " + p.x() + " " + p.y());
+}
+        assertEquals(1, bentleyOttmann.intersections().size());
+    }
+
+    public void testFindIntersections11() {
+        // self intersecting
+        System.out.println("test 11");
+        final List<ISegment> segments = new ArrayList<>();
+        Point p1 = new Point(0.0, 0.0);
+        Point p2 = new Point(10.0, 0.0);
+        Point p3 = new Point(0.0, 5.0);
+        Point p4 = new Point(10.0, 5.0);
+
+        segments.add(new Segment(p3, p2));
+        segments.add(new Segment(new Point(p2), p1));
+        segments.add(new Segment(new Point(p1), p4));
+
         final BentleyOttmann bentleyOttmann = new BentleyOttmann(Point::new);
         bentleyOttmann.addSegments(segments);
         bentleyOttmann.findIntersections();
