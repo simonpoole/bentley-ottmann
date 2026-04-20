@@ -5,6 +5,8 @@ import java.util.PriorityQueue;
 import org.jetbrains.annotations.NotNull;
 
 class EventQueue extends PriorityQueue<Event> {
+    private static final long serialVersionUID = 1L;
+
     @Override
     public boolean contains(@NotNull Object o) {
         boolean result = false;
